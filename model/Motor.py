@@ -1,7 +1,14 @@
+import numpy as np
+
 class Motor:
     def __init__(self, id, offset, packet_handler):
         self.id = id
         self.offset = offset
+        # initial offset based on position the model is in when the tool is as low as possible
+        a = 50
+        b = 78.868
+        c = 40
+        self.angle_offset = np.arccos((a*a + b*b - c*c) / (2*a*b))
         self.packet_handler = packet_handler
         self.mode = "position"
 
@@ -18,11 +25,11 @@ class Motor:
 
     def get_position_raw(self):
         position, _, _, _ = self.packet_handler.ReadPosSpeed(self.id)
-        return position - 4096 + self.offset 
+        return position - self.offset
     
     def get_position(self):
         position_raw = self.get_position_raw()
-        return -position_raw * 2 * 3.141592653589793 / 4096
+        return position_raw * 2 * 3.141592653589793 / 4096 + self.angle_offset
     
     def get_speed(self):
         _, speed, _, _ = self.packet_handler.ReadPosSpeed(self.id)

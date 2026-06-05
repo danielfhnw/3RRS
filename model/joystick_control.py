@@ -19,7 +19,7 @@ if __name__ == "__main__":
     try:
         robot.change_motor_mode("velocity")
         while not stop_requested:
-            robot.print_motor_positions(raw=True)
+            robot.print_motor_positions(raw=False)
             x = 0
             y = 0
             z = 0
