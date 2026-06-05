@@ -41,6 +41,11 @@ if sts_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(sts_comm_result))
 elif sts_error != 0:
     print("%s" % packetHandler.getRxPacketError(sts_error))
+sts_comm_result, sts_error = packetHandler.ServoMode(3)
+if sts_comm_result != COMM_SUCCESS:
+    print("%s" % packetHandler.getTxRxResult(sts_comm_result))
+elif sts_error != 0:
+    print("%s" % packetHandler.getRxPacketError(sts_error))
 
 servo_position1, servo_speed, sts_comm_result, sts_error = packetHandler.ReadPosSpeed(1)
 if sts_comm_result != COMM_SUCCESS:
@@ -52,20 +57,20 @@ if sts_comm_result != COMM_SUCCESS:
     print(packetHandler.getTxRxResult(sts_comm_result))
 if sts_error != 0:
     print(packetHandler.getRxPacketError(sts_error))
+servo_position3, servo_speed, sts_comm_result, sts_error = packetHandler.ReadPosSpeed(3)
+if sts_comm_result != COMM_SUCCESS:
+    print(packetHandler.getTxRxResult(sts_comm_result))
+if sts_error != 0:
+    print(packetHandler.getRxPacketError(sts_error))
 
-print(f"SERVO -> servo1: {servo_position1}, servo2: {servo_position2}")
+print(f"SERVO -> servo1: {servo_position1}, servo2: {servo_position2}, servo3: {servo_position3}")
 print("reset offset")
 
 offset_servo1 = 0
 offset_servo2 = 0
+offset_servo3 = 0
 
-print(f"offset_servo1: {offset_servo1}, offset_servo2: {offset_servo2}")
-
-sts_comm_result, sts_error = packetHandler.zero_motor(2, offset_servo2)
-if sts_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(sts_comm_result))
-elif sts_error != 0:
-    print("%s" % packetHandler.getRxPacketError(sts_error))
+print(f"offset_servo1: {offset_servo1}, offset_servo2: {offset_servo2}, offset_servo3: {offset_servo3}")
 
 sts_comm_result, sts_error = packetHandler.zero_motor(1, offset_servo1)
 if sts_comm_result != COMM_SUCCESS:
@@ -73,6 +78,18 @@ if sts_comm_result != COMM_SUCCESS:
 elif sts_error != 0:
     print("%s" % packetHandler.getRxPacketError(sts_error))
 
+sts_comm_result, sts_error = packetHandler.zero_motor(2, offset_servo2)
+if sts_comm_result != COMM_SUCCESS:
+    print("%s" % packetHandler.getTxRxResult(sts_comm_result))
+elif sts_error != 0:
+    print("%s" % packetHandler.getRxPacketError(sts_error))
+
+sts_comm_result, sts_error = packetHandler.zero_motor(3, offset_servo3)
+if sts_comm_result != COMM_SUCCESS:
+    print("%s" % packetHandler.getTxRxResult(sts_comm_result))
+elif sts_error != 0:
+    print("%s" % packetHandler.getRxPacketError(sts_error))
+
 servo_position1, servo_speed, sts_comm_result, sts_error = packetHandler.ReadPosSpeed(1)
 if sts_comm_result != COMM_SUCCESS:
     print(packetHandler.getTxRxResult(sts_comm_result))
@@ -83,8 +100,13 @@ if sts_comm_result != COMM_SUCCESS:
     print(packetHandler.getTxRxResult(sts_comm_result))
 if sts_error != 0:
     print(packetHandler.getRxPacketError(sts_error))
+servo_position3, servo_speed, sts_comm_result, sts_error = packetHandler.ReadPosSpeed(3)
+if sts_comm_result != COMM_SUCCESS:
+    print(packetHandler.getTxRxResult(sts_comm_result))
+if sts_error != 0:
+    print(packetHandler.getRxPacketError(sts_error))
 
-print(f"SERVO -> servo1: {servo_position1}, servo2: {servo_position2}")
+print(f"SERVO -> servo1: {servo_position1}, servo2: {servo_position2}, servo3: {servo_position3}")
 
 # Close port
 portHandler.closePort()

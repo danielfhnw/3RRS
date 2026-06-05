@@ -1,11 +1,5 @@
-# 2-Gelenk-Bogen-Modell
+# 3RRS-Modell
 Dieses Repo enthält die Software zum ersten Teil im msL.
-
-Die Übungen sind im Wiki beschrieben und mit den folgenden Links erreichbar:
-- [Vorwärtstransformation](https://github.com/danielfhnw/2gbm/wiki/%C3%9Cbungen#vorw%C3%A4rts-kinematik)
-- [Rückwärtstransformation](https://github.com/danielfhnw/2gbm/wiki/%C3%9Cbungen#r%C3%BCckw%C3%A4rtstransformation)
-- [Synchronisierte Bewegungen](https://github.com/danielfhnw/2gbm/wiki/%C3%9Cbungen#synchronisierte-bewegungen)
-- [P2P-Bewegungen](https://github.com/danielfhnw/2gbm/wiki/%C3%9Cbungen#p2p-bewegungen)
 
 Im folgenden wird die Installation beschrieben.
 
@@ -20,16 +14,16 @@ Im folgenden wird die Installation beschrieben.
 ### Repository
 Der Ordner mit allen Unterlagen kann mit folgendem Codezeilenbefehl kopiert werden.
 ```
-git clone https://github.com/danielfhnw/2gbm
+git clone https://github.com/danielfhnw/3rrs
 ```
 Alternativ kann auch GitHub Desktop oder die GitHub-Integration im VS Code verwendet werden.
-Um in den 2gbm Ordner zu gelangen kann folgende Kommandozeileneingabe verwendet werden.
+Um in den 3rrs Ordner zu gelangen kann folgende Kommandozeileneingabe verwendet werden.
 ```
-cd 2gbm
+cd 3rrs
 ```
 
 ### Virtual Environement
-Im 2gbm-Ordner soll nun ein virtuelles Environement erstellt werden. Dies dient dazu, dass alle Bibliotheken miteinander kompatibel bleiben und nicht durch Updates geändert werden.
+Im 3rrs-Ordner soll nun ein virtuelles Environement erstellt werden. Dies dient dazu, dass alle Bibliotheken miteinander kompatibel bleiben und nicht durch Updates geändert werden.
 ```
 python -m venv .venv
 ```
@@ -51,9 +45,9 @@ notepad .env
 ```
 Diese Datei muss mit folgendem Inhalt gefüllt werden.
 ```
-COM_PORT_NANO=COM3
 COM_PORT_MOTOR=COM4
 OFFSET_SERVO_1=0
 OFFSET_SERVO_2=0
+OFFSET_SERVO_3=0
 ```
 Dabei muss der COM-Port für den Nano und das Motorboard entsprechend angepasst werden. Die beiden Servo-Offsets sind an der jeweiligen Hardware zu bestimmen und da sie von Modell zu Modell verschieden sind, ebenfalls als Umgebungsvariabeln abgelegt.

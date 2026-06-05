@@ -19,10 +19,16 @@ def change_hold(packetHandler, hold):
     elif sts_error != 0:
         print("%s" % packetHandler.getRxPacketError(sts_error))
     print("hold: %s" % hold)
+    sts_comm_result, sts_error = packetHandler.change_hold(3, hold)
+    if sts_comm_result != COMM_SUCCESS:
+        print("%s" % packetHandler.getTxRxResult(sts_comm_result))
+    elif sts_error != 0:
+        print("%s" % packetHandler.getRxPacketError(sts_error))
+    print("hold: %s" % hold)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="set the hold of the two servos")
+    parser = argparse.ArgumentParser(description="set the hold of the three servos")
     parser.add_argument("hold", type=int, help="1 for True, 0 for False")
 
     args = parser.parse_args()
