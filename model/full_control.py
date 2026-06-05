@@ -15,20 +15,34 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, handle_sigint)
 
     try:
-        height = 50
+        height = 75
+        roll = 0
+        pitch = 0
         while not stop_requested:
             robot.print_actuator_lengths()
 
             if keyboard.is_pressed('1'):
                 height = 50
+                roll = 0
+                pitch = 0
             if keyboard.is_pressed('2'):
                 height = 75
+                pitch = 10
+                roll = 0
             if keyboard.is_pressed('3'):
                 height = 100
+                roll = 10
+                pitch = 0
             if keyboard.is_pressed('4'):
-                height = 125
+                height = 125.
+                roll = 0
+                pitch = 0
+            if keyboard.is_pressed('5'):
+                height = 100
+                roll = -10
+                pitch = 0
 
-            robot.set_tcp(0, 0, height, speed=100)
+            robot.set_tcp(roll, pitch, height, speed=500)
 
             if keyboard.is_pressed('x'):
                 print("Exiting...")

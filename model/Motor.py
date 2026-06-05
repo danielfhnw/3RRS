@@ -48,6 +48,12 @@ class Motor:
             raise ValueError("Calculated angle is out of range. Check the input length.")
         self.set_position(angle, speed)
 
+    def get_theoretical_angle(self, length):
+        if length < abs(self.a - self.b) or length > self.a + self.b:
+            raise ValueError("Length is out of range for the given arm configuration.")
+        angle = np.arccos((self.a*self.a + self.b*self.b - length*length) / (2*self.a*self.b))
+        return angle
+
     def set_position(self, position, speed=100):
         position_raw = int((position-self.angle_offset) * 4096 / (2 * 3.141592653589793) + self.offset)
         self.set_position_raw(position_raw, speed)

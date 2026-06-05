@@ -163,8 +163,31 @@ class Robot:
         length_right = np.linalg.norm(P_result[:, 1] - base_xyz[:, 1])
         length_left  = np.linalg.norm(P_result[:, 2] - base_xyz[:, 2])
 
-        self.motor_1.set_actuator_length(length_front, speed)
-        self.motor_2.set_actuator_length(length_right, speed)
-        self.motor_3.set_actuator_length(length_left, speed)
-        
+        angle_front = self.motor_1.get_theoretical_angle(length_front)
+        angle_right = self.motor_2.get_theoretical_angle(length_right)
+        angle_left  = self.motor_3.get_theoretical_angle(length_left)
+
+        diff_front = angle_front - self.motor_1.get_position()
+        diff_right = angle_right - self.motor_2.get_position()
+        diff_left  = angle_left  - self.motor_3.get_position()
+
+        diffs = np.array([diff_front, diff_right, diff_left], dtype=float)
+
+        max_diff = np.max(np.abs(diffs))
+
+        # avoid division by zero
+        if max_diff < 1e-9:
+            return
+
+        # base speed (your chosen max speed)
+        base_speed = speed
+
+        speed_front = base_speed * (abs(diff_front) / max_diff)
+        speed_right = base_speed * (abs(diff_right) / max_diff)
+        speed_left  = base_speed * (abs(diff_left)  / max_diff)
+
+        self.motor_1.set_actuator_length(length_front, speed_front)
+        self.motor_2.set_actuator_length(length_right, speed_right)
+        self.motor_3.set_actuator_length(length_left, speed_left)
+
         return length_front, length_right, length_left
