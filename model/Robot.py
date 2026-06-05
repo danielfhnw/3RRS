@@ -81,5 +81,90 @@ class Robot:
         self.motor_3.set_position(pos3, speed)
 
     def set_tcp(self, roll, pitch, height, speed=100):
-        # TODO 
-        pass
+        roll = np.deg2rad(roll)
+        pitch = np.deg2rad(pitch)
+        height = height - 12.5 # compensate for the distance of the anchor point to the plates
+
+        scale = 0.75
+        base_size = 100/np.cos(np.deg2rad(30))
+
+        # Base plate coordinates (homogeneous)
+        P = np.array([
+            [0,  np.sqrt(3)/2, -np.sqrt(3)/2],
+            [1, -0.5,          -0.5],
+            [0,  0,             0],
+            [1,  1,             1]
+        ], dtype=float)
+
+        T_base_size = np.array([
+            [base_size, 0,         0,        0],
+            [0,         base_size, 0,        0],
+            [0,         0,         base_size, 0],
+            [0,         0,         0,        1]
+        ], dtype=float)
+
+        P = T_base_size @ P
+
+        # Rotation matrices
+        T_roll = np.array([
+            [np.cos(roll), 0, np.sin(roll), 0],
+            [0,            1, 0,            0],
+            [-np.sin(roll),0, np.cos(roll), 0],
+            [0,            0, 0,            1]
+        ], dtype=float)
+
+        T_pitch = np.array([
+            [1, 0,            0,             0],
+            [0, np.cos(pitch), -np.sin(pitch), 0],
+            [0, np.sin(pitch),  np.cos(pitch), 0],
+            [0, 0,            0,             1]
+        ], dtype=float)
+
+        T_height = np.array([
+            [scale, 0,     0,     0],
+            [0,     scale, 0,     0],
+            [0,     0,     scale, height],
+            [0,     0,     0,     1]
+        ], dtype=float)
+
+        P_rot = T_height @ T_pitch @ T_roll @ P
+
+        # Alignment angle
+        phi = np.arctan2(-np.sin(pitch) * np.sin(roll),
+                        np.cos(pitch) + np.cos(roll))
+
+        # Shift and rotate in XY plane
+        P_xy = np.vstack([
+            P_rot[0, :],
+            P_rot[1, :] - P_rot[1, 0]
+        ])
+
+        R = np.array([
+            [np.cos(phi), -np.sin(phi)],
+            [np.sin(phi),  np.cos(phi)]
+        ])
+
+        P_xy_rot = R @ P_xy
+
+        # Re-center left/right plane
+        y_off = P_xy_rot[1, 1] + P_xy_rot[0, 1] / np.sqrt(3)
+        final_position = P_xy_rot - np.array([[0], [y_off]])
+
+        # Add Z back
+        P_result = np.vstack([
+            final_position,
+            P_rot[2, :]
+        ])
+
+        # Leg lengths (front, right, left)
+        base_xyz = P[0:3, :]
+
+        length_front = np.linalg.norm(P_result[:, 0] - base_xyz[:, 0])
+        length_right = np.linalg.norm(P_result[:, 1] - base_xyz[:, 1])
+        length_left  = np.linalg.norm(P_result[:, 2] - base_xyz[:, 2])
+
+        self.motor_1.set_actuator_length(length_front, speed)
+        self.motor_2.set_actuator_length(length_right, speed)
+        self.motor_3.set_actuator_length(length_left, speed)
+        
+        return length_front, length_right, length_left
