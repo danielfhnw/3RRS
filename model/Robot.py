@@ -68,3 +68,8 @@ class Robot:
         self.motor_1.set_speed(joystick_y * 10)
         self.motor_2.set_speed(joystick_x * 10)
         self.motor_3.set_speed(joystick_z * 10)
+
+    def set_motor_positions(self, pos1, pos2, pos3, speed=100):
+        self.motor_1.set_position(pos1, speed)
+        self.motor_2.set_position(pos2, speed)
+        self.motor_3.set_position(pos3, speed)
