@@ -57,14 +57,13 @@ class Robot:
 
     def print_motor_positions(self, raw=False):
         pos1, pos2, pos3 = self.get_motor_positions(raw)
-        print(f"\rMotor_1: {pos1:<6} | Motor_2: {pos2:<6} | Motor_3: {pos3:<6}", end="", flush=True)
+        print(f"\rMotor_1: {pos1:<6.2f} | Motor_2: {pos2:<6.2f} | Motor_3: {pos3:<6.2f}", end="", flush=True)
 
     def print_actuator_lengths(self):
         length1 = self.motor_1.get_actuator_length()
         length2 = self.motor_2.get_actuator_length()
         length3 = self.motor_3.get_actuator_length()
-        print(f"\rMotor_1: {length1:<6} | Motor_2: {length2:<6} | Motor_3: {length3:<6}", end="", flush=True)
-
+        print(f"\rMotor_1: {length1:<6.2f} | Motor_2: {length2:<6.2f} | Motor_3: {length3:<6.2f}", end="", flush=True)
     def change_motor_mode(self, mode):
         self.motor_1.change_mode(mode)
         self.motor_2.change_mode(mode)
