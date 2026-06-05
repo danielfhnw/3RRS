@@ -5,10 +5,10 @@ class Motor:
         self.id = id
         self.offset = offset
         # initial offset based on position the model is in when the tool is as low as possible
-        a = 50
-        b = 78.868
-        c = 40
-        self.angle_offset = np.arccos((a*a + b*b - c*c) / (2*a*b))
+        self.a = 50
+        self.b = 78.868
+        self.c = 40
+        self.angle_offset = np.arccos((self.a*self.a + self.b*self.b - self.c*self.c) / (2*self.a*self.b))
         self.packet_handler = packet_handler
         self.mode = "position"
 
@@ -31,10 +31,23 @@ class Motor:
         position_raw = self.get_position_raw()
         return position_raw * 2 * 3.141592653589793 / 4096 + self.angle_offset
     
+    def get_actuator_length(self):
+        angle = self.get_position()
+        c = np.sqrt(self.a*self.a + self.b*self.b - 2*self.a*self.b*np.cos(angle))
+        return c
+
     def get_speed(self):
         _, speed, _, _ = self.packet_handler.ReadPosSpeed(self.id)
         return speed
     
+    def set_actuator_length(self, length, speed=100):
+        if length < abs(self.a - self.b) or length > self.a + self.b:
+            raise ValueError("Length is out of range for the given arm configuration.")
+        angle = np.arccos((self.a*self.a + self.b*self.b - length*length) / (2*self.a*self.b))
+        if angle < self.angle_offset or angle > (np.pi - 0.3):
+            raise ValueError("Calculated angle is out of range. Check the input length.")
+        self.set_position(angle, speed)
+
     def set_position(self, position, speed=100):
         position_raw = int((position-self.angle_offset) * 4096 / (2 * 3.141592653589793) + self.offset)
         self.set_position_raw(position_raw, speed)

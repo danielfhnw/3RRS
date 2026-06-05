@@ -59,6 +59,12 @@ class Robot:
         pos1, pos2, pos3 = self.get_motor_positions(raw)
         print(f"\rMotor_1: {pos1:<6} | Motor_2: {pos2:<6} | Motor_3: {pos3:<6}", end="", flush=True)
 
+    def print_actuator_lengths(self):
+        length1 = self.motor_1.get_actuator_length()
+        length2 = self.motor_2.get_actuator_length()
+        length3 = self.motor_3.get_actuator_length()
+        print(f"\rMotor_1: {length1:<6} | Motor_2: {length2:<6} | Motor_3: {length3:<6}", end="", flush=True)
+
     def change_motor_mode(self, mode):
         self.motor_1.change_mode(mode)
         self.motor_2.change_mode(mode)
@@ -73,3 +79,7 @@ class Robot:
         self.motor_1.set_position(pos1, speed)
         self.motor_2.set_position(pos2, speed)
         self.motor_3.set_position(pos3, speed)
+
+    def set_tcp(self, roll, pitch, height, speed=100):
+        # TODO 
+        pass
