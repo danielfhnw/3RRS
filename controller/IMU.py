@@ -18,7 +18,7 @@ class IMU:
         line = self.ser.readline().decode("utf-8").strip()
 
         if not line:
-            return None
+            return None, None
 
         pitch_imu, roll_imu = line.split(",")
         pitch_imu = float(pitch_imu)
