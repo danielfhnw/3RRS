@@ -14,16 +14,16 @@ Im folgenden wird die Installation beschrieben.
 ### Repository
 Der Ordner mit allen Unterlagen kann mit folgendem Codezeilenbefehl kopiert werden.
 ```
-git clone https://github.com/danielfhnw/3rrs
+git clone https://github.com/danielfhnw/3RRS
 ```
 Alternativ kann auch GitHub Desktop oder die GitHub-Integration im VS Code verwendet werden.
-Um in den 3rrs Ordner zu gelangen kann folgende Kommandozeileneingabe verwendet werden.
+Um in den 3RRS Ordner zu gelangen kann folgende Kommandozeileneingabe verwendet werden.
 ```
-cd 3rrs
+cd 3RRS
 ```
 
 ### Virtual Environement
-Im 3rrs-Ordner soll nun ein virtuelles Environement erstellt werden. Dies dient dazu, dass alle Bibliotheken miteinander kompatibel bleiben und nicht durch Updates geändert werden.
+Im 3RRS-Ordner soll nun ein virtuelles Environement erstellt werden. Dies dient dazu, dass alle Bibliotheken miteinander kompatibel bleiben und nicht durch Updates geändert werden.
 ```
 python -m venv .venv
 ```
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 Sobald alles erfolgreich installiert wurde, ist das virtuelle Environement bereit.
 
 ### Environement Variable
-Damit nicht in jedem Skript die COM-Ports angepasst werden müssen, werden in diesem Projekt Environement Variablen zur Speicherung verwendet. Dies hat den Vorteil, dass die Skripts updated werden können, ohne dass die COM-Ports überschrieben werden. Damit dies funktioniert muss im 3rrs-Ordner ein File erstellt werden mit dem Namen `.env`. Dies kann mit dem folgenden Befehl erstellt werden.
+Damit nicht in jedem Skript die COM-Ports angepasst werden müssen, werden in diesem Projekt Environement Variablen zur Speicherung verwendet. Dies hat den Vorteil, dass die Skripts updated werden können, ohne dass die COM-Ports überschrieben werden. Damit dies funktioniert muss im 3RRS-Ordner ein File erstellt werden mit dem Namen `.env`. Dies kann mit dem folgenden Befehl erstellt werden.
 ```
 notepad .env
 ```
