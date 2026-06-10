@@ -54,7 +54,6 @@ OFFSET_SERVO_3=1662
 Dabei muss der COM-Port für den Seeeduino und das Motorboard entsprechend angepasst werden. Die  Servo-Offsets sind an der jeweiligen Hardware zu bestimmen und da sie von Modell zu Modell verschieden sind, ebenfalls als Umgebungsvariabeln abgelegt.
 
 ## BOM
-
 - 3x https://www.waveshare.com/wiki/ST3215_Servo
 - 1x https://www.waveshare.com/wiki/Bus_Servo_Adapter_(A)?srsltid=AfmBOopFUcmjpQCkET0qZIshGwUuTE_U6VoR4gDlRMLTdKMSerG3c7sd
 - 1x https://wiki.seeedstudio.com/Seeeduino_Lotus/
