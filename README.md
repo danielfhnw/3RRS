@@ -5,7 +5,7 @@ Im folgenden wird die Installation beschrieben.
 
 ## Installation 
 
-### Voraussetungen (falls nicht bereits installiert)
+### Voraussetzungen (falls nicht bereits installiert)
 - [Python](https://www.python.org/downloads/) ACHTUNG: Maintenance status security und nicht bugfix, damit die Kompatibilität zu den nötigen Bibliotheken gewährleistet ist. 
 - [Python IDE](https://code.visualstudio.com/download)
 - [Git](https://git-scm.com/downloads)
