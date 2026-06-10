@@ -1,6 +1,6 @@
 # 3RRS-Modell
-Dieses Repo enthält die Software zum ersten Teil im msL.
-
+Dieses Repo enthält die Software und das CAD-Modell zum 3RRS-Modell.
+<img width="2558" height="1817" alt="3RRS" src="https://github.com/user-attachments/assets/1ed54f76-7991-40f1-b969-7a074ef759af" />
 Im folgenden wird die Installation beschrieben.
 
 ## Installation 
