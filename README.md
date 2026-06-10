@@ -39,15 +39,23 @@ pip install -r requirements.txt
 Sobald alles erfolgreich installiert wurde, ist das virtuelle Environement bereit.
 
 ### Environement Variable
-Damit nicht in jedem Skript die COM-Ports angepasst werden müssen, werden in diesem Projekt Environement Variablen zur Speicherung verwendet. Dies hat den Vorteil, dass die Skripts updated werden können, ohne dass die COM-Ports überschrieben werden. Damit dies funktioniert muss im 2gbm-Ordner ein File erstellt werden mit dem Namen `.env`. Dies kann mit dem folgenden Befehl erstellt werden.
+Damit nicht in jedem Skript die COM-Ports angepasst werden müssen, werden in diesem Projekt Environement Variablen zur Speicherung verwendet. Dies hat den Vorteil, dass die Skripts updated werden können, ohne dass die COM-Ports überschrieben werden. Damit dies funktioniert muss im 3rrs-Ordner ein File erstellt werden mit dem Namen `.env`. Dies kann mit dem folgenden Befehl erstellt werden.
 ```
 notepad .env
 ```
 Diese Datei muss mit folgendem Inhalt gefüllt werden.
 ```
-COM_PORT_MOTOR=COM4
-OFFSET_SERVO_1=0
-OFFSET_SERVO_2=0
-OFFSET_SERVO_3=0
+COM_PORT_MOTOR=COM80
+COM_PORT_IMU=COM81
+OFFSET_SERVO_1=2816
+OFFSET_SERVO_2=1255
+OFFSET_SERVO_3=1662
 ```
-Dabei muss der COM-Port für den Nano und das Motorboard entsprechend angepasst werden. Die beiden Servo-Offsets sind an der jeweiligen Hardware zu bestimmen und da sie von Modell zu Modell verschieden sind, ebenfalls als Umgebungsvariabeln abgelegt.
+Dabei muss der COM-Port für den Seeeduino und das Motorboard entsprechend angepasst werden. Die  Servo-Offsets sind an der jeweiligen Hardware zu bestimmen und da sie von Modell zu Modell verschieden sind, ebenfalls als Umgebungsvariabeln abgelegt.
+
+## BOM
+
+- 3x https://www.waveshare.com/wiki/ST3215_Servo
+- 1x https://www.waveshare.com/wiki/Bus_Servo_Adapter_(A)?srsltid=AfmBOopFUcmjpQCkET0qZIshGwUuTE_U6VoR4gDlRMLTdKMSerG3c7sd
+- 1x https://wiki.seeedstudio.com/Seeeduino_Lotus/
+- 1x https://wiki.seeedstudio.com/Grove-6-Axis_Accelerometer&Gyroscope_BMI088/
